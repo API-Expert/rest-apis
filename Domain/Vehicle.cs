@@ -5,8 +5,8 @@ public class Vehicle
     public Vehicle(string id,  string name, string brand)
     {
 
-        if (String.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
-        if (String.IsNullOrEmpty(brand)) throw new ArgumentNullException(nameof(brand));
+        if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+        if (string.IsNullOrEmpty(brand)) throw new ArgumentNullException(nameof(brand));
         if (string.IsNullOrEmpty(id)) throw new ArgumentNullException(nameof(id));
 
         Id = id;
