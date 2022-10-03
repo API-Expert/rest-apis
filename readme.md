@@ -16,4 +16,3 @@ Este projeto é um cadastro de veículos que possui funções de leitura e escri
 - Não utilize extensões de arquivos
 - Utilize query para filters
 2. Aplique versionamento na rota
-3. Faça testes utilizando retornos em formato JSON e XML
