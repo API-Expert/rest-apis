@@ -12,7 +12,6 @@ public class InMemroyVehicleRepository : IVehicleRepository
     public InMemroyVehicleRepository()
     {
         vehicles = new List<Vehicle>();
-
         
     }
 
@@ -21,8 +20,8 @@ public class InMemroyVehicleRepository : IVehicleRepository
     {
 
         var findResult = vehicles.FindAll(predicate)
-            .Take(pageSize)
-            .Skip((page - 1) * pageSize);
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize);
 
         return new ExecutionResult<IEnumerable<Vehicle>>(findResult);
 
