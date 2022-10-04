@@ -18,6 +18,19 @@ namespace Domain
         public ExecutionResult<IEnumerable<Vehicle>> Find(Predicate<Vehicle> predicate, int page, int pageSize) => repository.Find(predicate, page, pageSize);
 
         public ExecutionResult<Vehicle.VehicleDetails> GetDetailsById(string id) => repository.GetDetailsById(id);
+
+        public ExecutionResult<bool> UpdateDetails(string id, Vehicle.VehicleDetails details)
+        {
+            var vehicle = repository.GetById(id).Result;
+
+            if (vehicle == null)
+                return new ExecutionResult<bool>(false);
+
+            vehicle.Details = details;
+            repository.Update(vehicle);
+            return new ExecutionResult<bool>(true);
+
+        }
     }
 }
 
