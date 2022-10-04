@@ -16,6 +16,8 @@ namespace Domain
         public ExecutionResult<Vehicle?> GetById(string id) => repository.GetById(id);
 
         public ExecutionResult<IEnumerable<Vehicle>> Find(Predicate<Vehicle> predicate, int page, int pageSize) => repository.Find(predicate, page, pageSize);
+
+        public ExecutionResult<Vehicle.VehicleDetails> GetDetailsById(string id) => repository.GetDetailsById(id);
     }
 }
 
