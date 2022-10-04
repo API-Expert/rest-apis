@@ -242,6 +242,28 @@ namespace Domain.Tests
 
         }
 
+        [Fact]
+        public void Update_Details_Id_Exists()
+        {
+
+            var details = new Vehicle.VehicleDetails("test details");
+            var result = service.UpdateDetails(testId, details);
+            Assert.True(result.Result);
+
+
+        }
+
+        [Fact]
+        public void Update_Details_Id_Not_Exists()
+        {
+            var id = Guid.NewGuid().ToString();
+            var details = new Vehicle.VehicleDetails("test details");
+            var result = service.UpdateDetails(id, details);
+            Assert.False(result.Result);
+
+
+        }
+
     }
 
 
