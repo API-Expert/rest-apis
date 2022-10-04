@@ -38,6 +38,10 @@ namespace Domain.Tests
             repository.Insert(new Vehicle(NewGuid(), "F8 TRIBUTO", "Ferrari"));
             repository.Insert(new Vehicle(NewGuid(), "F8 SPIDER", "Ferrari"));
             repository.Insert(new Vehicle(NewGuid(), "ROMA", "Ferrari"));
+
+            var testVehicle = repository.GetById(testId).Result;
+            testVehicle.Details = new Vehicle.VehicleDetails("Is a huge car");
+           
         }
 
 
@@ -210,6 +214,30 @@ namespace Domain.Tests
 
             Assert.Equal(0, result.Result?.Count());
             
+
+
+        }
+
+        [Fact]
+        public void Get_Details_By_Id_Exists()
+        {
+            var details = repository.GetDetailsById(testId).Result;
+
+            var vehicle = repository.GetById(testId).Result;
+
+            Assert.Equal(vehicle.Details, details);
+
+            
+
+        }
+
+        [Fact]
+        public void Get_Details_By_Id_Not_Exists()
+        {
+            var id = Guid.NewGuid().ToString();
+            var details = repository.GetDetailsById(id).Result;
+
+            Assert.Null(details);
 
 
         }

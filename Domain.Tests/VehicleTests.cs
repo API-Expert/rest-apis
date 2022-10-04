@@ -46,8 +46,8 @@ public class VehicleTests
 
         Assert.Throws<ArgumentNullException>(() =>
         {
-        var name = string.Empty;
-        var brand = "Ferrari";
+            var name = string.Empty;
+            var brand = "Ferrari";
             _ = new Vehicle(name, brand);
 
         });
@@ -59,15 +59,44 @@ public class VehicleTests
     {
         Assert.Throws<ArgumentNullException>(() =>
         {
-        var name = string.Empty;
-        var brand = "Ferrari";
-        var id = string.Empty;
+            var name = string.Empty;
+            var brand = "Ferrari";
+            var id = string.Empty;
 
-            _ = new Vehicle(id,name, brand);
+            _ = new Vehicle(id, name, brand);
 
         });
 
     }
+
+    [Fact]
+    public void Vehicle_Invalid_Details_Exception()
+    {
+
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+
+            var description = "";
+           _ = new Vehicle.VehicleDetails(description);
+
+        });
+
+
+    }
+
+    [Fact]
+    public void Vehicle_Details_Success()
+    {
+
+        var description = "F40 is a huge car";
+
+        var details = new Vehicle.VehicleDetails(description);
+
+        Assert.Equal(details.Description, description);
+
+
+    }
+
 
 
 }

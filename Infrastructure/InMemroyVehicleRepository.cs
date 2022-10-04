@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Domain;
+using System.Linq;
 
 public class InMemroyVehicleRepository : IVehicleRepository
 {
@@ -31,6 +32,16 @@ public class InMemroyVehicleRepository : IVehicleRepository
     public ExecutionResult<Vehicle?> GetById(string id)
     {
         return new ExecutionResult<Vehicle?>( vehicles.FirstOrDefault(v => v.Id == id));
+    }
+
+    public ExecutionResult<Vehicle.VehicleDetails?> GetDetailsById(string id)
+    {
+        var details = from vehicle in vehicles
+                      where vehicle.Id == id
+                      select vehicle.Details;
+
+        return new ExecutionResult<Vehicle.VehicleDetails?>(details.SingleOrDefault());
+                      
     }
 
     public ExecutionResult<string> Insert(Vehicle vehicle)
