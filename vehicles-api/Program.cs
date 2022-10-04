@@ -65,13 +65,13 @@ app.MapGet("/v1/vehicles/", (VehicleSearchRequest request, VehicleService servic
         return Results.BadRequest(new { errors = errorMessages.ToArray() });
 
 
-   var result = service.Find(f =>
-     (f.Name == request.Name || string.IsNullOrEmpty(request.Name))
-     &&
-     (f.Brand == request.Brand || string.IsNullOrEmpty(request.Brand))
-     ,
-     request.Page.Value,
-     request.PageSize.Value);
+    var result = service.Find(f =>
+      (f.Name == request.Name || string.IsNullOrEmpty(request.Name))
+      &&
+      (f.Brand == request.Brand || string.IsNullOrEmpty(request.Brand))
+      ,
+      request.Page.Value,
+      request.PageSize.Value);
 
 
     return Results.Ok(result.Result);
@@ -116,6 +116,35 @@ app.MapDelete("/v1/vehicles/{id}", (string id, VehicleService service) =>
 
 
 });
+
+app.MapGet("/v1/vehicles/{id}/details", (string id, VehicleService service) =>
+{
+    var result = service.GetDetailsById(id);
+    return result.Result == null
+    ? Results.NotFound()
+    : Results.Ok(result.Result);
+
+
+
+
+});
+
+app.MapPut("/v1/vehicles/{id}/details", (string id, VehicleDetailsPutRequest request, VehicleService service) =>
+{
+
+    var details = new Vehicle.VehicleDetails(request.Description);
+
+    var result = service.UpdateDetails(id, details);
+
+    return result.Result
+    ? Results.NoContent()
+    : Results.NotFound();
+
+
+
+
+});
+
 app.Run();
 
 
