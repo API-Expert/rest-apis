@@ -45,7 +45,7 @@ app.MapGet("/v1/vehicles/{id}", (string id, VehicleService service) =>
 
         return result.Result == null
         ? Results.NotFound()
-        : Results.Ok(result.Result);
+        : Results.Ok(new VehicleResponse( result.Result));
 
 
 });
@@ -74,7 +74,7 @@ app.MapGet("/v1/vehicles/", (VehicleSearchRequest request, VehicleService servic
       request.PageSize.Value);
 
 
-    return Results.Ok(result.Result);
+    return Results.Ok(result.Result.Select(s=> new VehicleResponse(s)));
 
 });
 
@@ -122,7 +122,7 @@ app.MapGet("/v1/vehicles/{id}/details", (string id, VehicleService service) =>
     var result = service.GetDetailsById(id);
     return result.Result == null
     ? Results.NotFound()
-    : Results.Ok(result.Result);
+    : Results.Ok(new VehicleDetailsResponse(id, result.Result));
 
 
 
